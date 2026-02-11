@@ -1,0 +1,14 @@
+# الملفات المؤقتة
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# مجلدات النظام
+node_modules/
+.vscode/
+.idea/
+
+# الملفات الكبيرة (اختياري - إذا أردت استبعاد quran_data.json)
+# quran_data.json
+# audio/*.mp3

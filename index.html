@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#c9a050" id="theme-color-meta">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="المصحف الشريف">
+    <meta name="application-name" content="المصحف الشريف">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="msapplication-TileColor" content="#c9a050">
+    <meta name="msapplication-navbutton-color" content="#c9a050">
+    
+    <title>المصحف الشريف - القرآن الكريم</title>
+    
+    <!-- PWA Links -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/icon-152.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="icons/icon-152.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-mode">
+    <main class="swiper">
+        <div class="swiper-wrapper" id="quran-pages"></div>
+    </main>
+
+    <!-- الأزرار المنبثقة - تظهر في أسفل الشاشة -->
+    <div id="install-prompt" class="install-prompt hidden">
+        <div class="install-content">
+            <div class="install-icon">📱</div>
+            <div class="install-text">
+                <h4>ثبّت تطبيق المصحف الشريف</h4>
+                <p>تصفح القرآن الكريم بسهولة وسرعة</p>
+            </div>
+            <button id="install-button" class="install-button">تثبيت</button>
+            <button id="install-close" class="install-close">✕</button>
+        </div>
+    </div>
+
+    <!-- إشعار التحديث - مخفي افتراضياً -->
+    <div id="update-notification" class="update-notification hidden">
+        <div class="update-content">
+            <span>🔄</span>
+            <p>يوجد تحديث جديد للتطبيق</p>
+            <button id="update-button" onclick="location.reload()">تحديث الآن</button>
+            <button id="update-close">✕</button>
+        </div>
+    </div>
+
+    <header id="top-bar" class="nav-panel">
+        <div class="info-group">
+            <span id="surah-name">سورة الفاتحة</span>
+            <span id="juz-info">الجزء ١</span>
+            <span id="page-num">صفحة ١</span>
+        </div>
+        <div class="audio-controls" id="audio-controls">
+            <button id="play-pause-btn" onclick="quranApp.toggleAudio()">▶️</button>
+            <input type="range" id="audio-progress" min="0" max="100" value="0" onchange="quranApp.seekAudio(this.value)">
+            <span id="audio-time">00:00</span>
+        </div>
+    </header>
+
+    <div id="search-overlay" class="overlay hidden">
+        <div class="search-header">
+            <button class="close-btn" onclick="closeOverlay('search-overlay')">✕</button>
+            <div class="search-input-group">
+                <input type="text" id="search-input" placeholder="ابحث عن آية..." autocomplete="off">
+                <span id="results-count">0 نتيجة</span>
+            </div>
+        </div>
+        <div id="search-results-list" class="list-container"></div>
+    </div>
+
+    <div id="index-overlay" class="overlay hidden">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('surah')">📖 السور</button>
+            <button class="tab-btn" onclick="showTab('juz')">📚 الأجزاء</button>
+            <button class="tab-btn" onclick="showTab('pages')">📄 الصفحات</button>
+        </div>
+        <div id="surah-list" class="list-container tab-content active"></div>
+        <div id="juz-list" class="list-container tab-content hidden"></div>
+        <div id="pages-list" class="list-container tab-content hidden"></div>
+    </div>
+
+    <div id="bookmark-overlay" class="overlay hidden">
+        <div class="overlay-header">
+            <h3>🔖 العلامات المحفوظة</h3>
+            <button class="close-btn" onclick="closeOverlay('bookmark-overlay')">✕</button>
+        </div>
+        <div id="bookmarks-list" class="list-container"></div>
+    </div>
+
+    <div id="settings-overlay" class="overlay hidden">
+        <div class="overlay-header">
+            <h3>⚙️ الإعدادات</h3>
+            <button class="close-btn" onclick="closeOverlay('settings-overlay')">✕</button>
+        </div>
+        <div class="list-container">
+            <div class="settings-item">
+                <div>
+                    <strong>الوضع الليلي</strong>
+                    <span style="color:#888; font-size:0.9rem;">تغيير ألوان التطبيق</span>
+                </div>
+                <button class="toggle-btn" onclick="toggleTheme()" id="theme-toggle-settings">🌙</button>
+            </div>
+            <div class="settings-item">
+                <div>
+                    <strong>التخزين المؤقت</strong>
+                    <span style="color:#888; font-size:0.9rem;">مساحة التخزين المستخدمة</span>
+                </div>
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <span id="cache-size">0 MB</span>
+                    <button class="clear-cache-btn" onclick="quranApp.clearCache()">🗑️ مسح</button>
+                </div>
+            </div>
+            <div class="settings-item">
+                <div>
+                    <strong>حول التطبيق</strong>
+                    <span style="color:#888; font-size:0.9rem;">الإصدار 1.0.0</span>
+                </div>
+                <span style="color:var(--gold);">© 2026</span>
+            </div>
+        </div>
+    </div>
+
+    <footer id="bottom-bar" class="nav-panel">
+        <button class="nav-btn" onclick="openOverlay('index-overlay')">📖 الفهرس</button>
+        <button class="nav-btn" onclick="openOverlay('search-overlay')">🔍 بحث</button>
+        <button class="nav-btn" onclick="saveBookmark()">🔖 حفظ</button>
+        <button class="nav-btn" onclick="openOverlay('bookmark-overlay')">📚 العلامات</button>
+        <button class="nav-btn" onclick="openOverlay('settings-overlay')">⚙️ إعدادات</button>
+        <button class="nav-btn" onclick="quranApp.toggleAudio()" id="audio-toggle">🔇</button>
+    </footer>
+
+    <!-- مشغل الصوت -->
+    <audio id="quran-audio" preload="none"></audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

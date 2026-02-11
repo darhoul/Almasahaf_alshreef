@@ -1,0 +1,131 @@
+{
+  "name": "المصحف الشريف - القرآن الكريم",
+  "short_name": "المصحف",
+  "description": "تطبيق المصحف الشريف المتكامل - تصفح القرآن الكريم بسهولة، بحث متقدم، فهارس شاملة، وتلاوات صوتية. يعمل بدون إنترنت.",
+  "start_url": "/",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone", "window-controls-overlay"],
+  "background_color": "#fdf6e3",
+  "theme_color": "#c9a050",
+  "orientation": "portrait",
+  "categories": ["books", "religion", "education", "productivity"],
+  "dir": "rtl",
+  "lang": "ar",
+  "prefer_related_applications": false,
+  "scope": "/",
+  "scope_extensions": [
+    {
+      "origin": "https://*.quran.com"
+    }
+  ],
+  "launch_handler": {
+    "client_mode": ["focus-existing", "navigate-existing"]
+  },
+  "shortcuts": [
+    {
+      "name": "آخر صفحة مقروءة",
+      "short_name": "آخر صفحة",
+      "description": "العودة إلى آخر صفحة كنت تقرأ فيها",
+      "url": "/?page=last",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "فهرس السور",
+      "short_name": "السور",
+      "description": "تصفح جميع سور القرآن الكريم",
+      "url": "/?tab=surah",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "بحث في القرآن",
+      "short_name": "بحث",
+      "description": "ابحث عن أي آية في القرآن",
+      "url": "/?search",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/1.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "platform": "wide",
+      "label": "شاشة القراءة الرئيسية - عرض المصحف كاملاً"
+    },
+    {
+      "src": "screenshots/2.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "platform": "wide",
+      "label": "فهرس السور - تصفح سريع ومنظم"
+    },
+    {
+      "src": "screenshots/3.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "platform": "wide",
+      "label": "بحث متقدم في القرآن الكريم"
+    }
+  ],
+  "related_applications": [],
+  "iarc_rating_id": "f143b2d3-5f7e-4a9c-8d1e-6b2a9c4f8e7a",
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}
