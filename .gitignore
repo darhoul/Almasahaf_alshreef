@@ -12,3 +12,6 @@ node_modules/
 # الملفات الكبيرة (اختياري - إذا أردت استبعاد quran_data.json)
 # quran_data.json
 # audio/*.mp3
+images/
+audio/
+screenshots/
